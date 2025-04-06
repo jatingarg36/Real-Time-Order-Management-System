@@ -1,0 +1,25 @@
+CREATE TABLE IF NOT EXISTS users (
+    user_id UUID PRIMARY KEY,
+    username TEXT NOT NULL,
+    created_at TIMESTAMP NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS orders (
+    order_id UUID PRIMARY KEY,
+    status TEXT NOT NULL,
+    user_id UUID NOT NULL,
+    store_id UUID NOT NULL,
+    total_amount NUMERIC NOT NULL,
+    payment_id UUID NOT NULL,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS order_items (
+    order_id UUID NOT NULL,
+    item_id UUID NOT NULL,
+    quantity INTEGER NOT NULL,
+    PRIMARY KEY (order_id, item_id),
+    FOREIGN KEY (order_id) REFERENCES orders(order_id)
+);
