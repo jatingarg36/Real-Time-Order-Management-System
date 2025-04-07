@@ -8,9 +8,9 @@ conn = psycopg2.connect(
     port="5432"
 )
 
-def create_orders_tables():
+def create_required_tables():
     with conn.cursor() as cursor:
-        cursor.execute(open("db_setup.sql", "r").read())
+        print( cursor.execute(open("db_setup.sql", "r").read()))
 
 
-create_orders_tables()
+create_required_tables()
