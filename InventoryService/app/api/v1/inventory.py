@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter
 
@@ -11,7 +11,7 @@ router = APIRouter(prefix='/inventory')
 
 @router.get('/all_items', response_model=List[Item],
             description="Api endpoint to list all the available items of a store")
-async def action(store_id: str):
+async def action(store_id: Optional[str] = None):
     return await InventoryHandler().fetch_items(store_id)
 
 

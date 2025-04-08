@@ -1,6 +1,7 @@
 import json
 import uuid
 from datetime import datetime
+from typing import Optional
 
 from InventoryService.app.core.kafka.producer import get_kafka_producer
 from InventoryService.app.db.crud import update_item, fetch_item, add_item, fetch_all_item
@@ -25,5 +26,5 @@ class InventoryHandler:
         await update_item.action(updates)
         return await fetch_item.action(str(updates.item_id))
 
-    async def fetch_items(self, store_id: str):
+    async def fetch_items(self, store_id: Optional[str]):
         return await fetch_all_item.action(store_id)

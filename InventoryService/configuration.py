@@ -15,6 +15,11 @@ if BRANCH == "develop":
 
 class GlobalConfig(BaseSettings):
     DB_NAME: str = response_secrets["DB_NAME"]
+    DB_HOST: str = response_secrets["DB_HOST"]
+    DB_PORT: str = response_secrets["DB_PORT"]
+    DB_USER: str = response_secrets["DB_USER"]
+    DB_PASSWORD: str = response_secrets["DB_PASSWORD"]
+
     INVENTORY_TABLE_NAME: str = response_secrets["INVENTORY_TABLE_NAME"]
 
     KAFKA_SERVER: str = response_secrets["KAFKA_SERVER"]

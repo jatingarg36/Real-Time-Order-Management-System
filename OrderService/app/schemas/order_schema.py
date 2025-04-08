@@ -15,6 +15,7 @@ class OrderItemsCreate(BaseModel):
 class OrderCreate(BaseModel):
     items: List[OrderItemsCreate]
     user_id: UUID
+    total_price: float
     store_id: UUID
 
 

@@ -29,7 +29,8 @@ class OrderManager:
         new_order = Order(order_id=uuid.uuid4(),
                           status=OrderStatus.PENDING,
                           user_id=order.user_id,
-                          total_amount=100,
+                          total_amount=order.total_price,
+                          # This will be handled while placing the order, and validating it with payment.
                           store_id=order.store_id,
                           payment_id=uuid.uuid4(),
                           created_at=datetime.now(),
@@ -63,7 +64,6 @@ class OrderManager:
         if result is None:
             raise HTTPException(status_code=404, detail="Invalid order_id")
         return result
-
 
     async def fetch_all_orders(self, user_id, params: Params) -> List[OrderResponse]:
         return await fetch_all_orders.action(user_id, params, self.response_encoder.encode_order_records)
