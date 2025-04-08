@@ -15,7 +15,7 @@ async def action(store_id: str):
     return await InventoryHandler().fetch_items(store_id)
 
 
-@router.post('/add_items', description="Api endpoint for store owners to add items to inventory")
+@router.post('/add_item', description="Api endpoint for store owners to add items to inventory")
 async def action(create_item: ItemCreate):
     return await InventoryHandler().add_new_item(create_item)
 
