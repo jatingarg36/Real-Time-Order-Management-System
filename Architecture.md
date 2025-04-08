@@ -97,6 +97,12 @@ This separation supports microservices best practices by decoupling data layers.
 7. **Startup Sync (Order Service)**:
     - Loads current inventory from Inventory Service into Redis on boot.
 
+
+---
+
+### Flow Diagram
+![System Flow](./flow_diagram.svg)
+
 ---
 
 ### Technologies Used
