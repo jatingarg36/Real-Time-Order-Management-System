@@ -6,11 +6,9 @@ from pydantic.v1 import BaseSettings
 
 load_dotenv(verbose=True, override=True)
 
-BRANCH = os.environ.get('branch')
-if BRANCH == "develop":
-    base_dir = pathlib.Path(__file__).parent
-    load_dotenv(base_dir, override=True)
-    response_secrets = {k: v for k, v in os.environ.items()}
+base_dir = pathlib.Path(__file__).parent
+load_dotenv(base_dir, override=True)
+response_secrets = {k: v for k, v in os.environ.items()}
 
 
 class GlobalConfig(BaseSettings):

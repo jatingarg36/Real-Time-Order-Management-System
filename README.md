@@ -67,7 +67,7 @@ The repository is organized as follows:
 
       ```bash
       python3 -m venv venv
-      source venv/bin/activate  # On Windows, use 'venv\Scripts\activate'
+      source venv/bin/activate
       ```
 
     - Install the required Python packages:
@@ -78,27 +78,12 @@ The repository is organized as follows:
 
 3. **Set Up Environment Variables**:
 
-    - Each service may require specific environment variables for configuration. Create a `.env` file in the root
-      directory and add the necessary variables. For example:
+    - Each service require specific environment variables for configuration. Create a `.env` file in the root
+      directory of the individual service and add the necessary variables. 
+    - Sample .env file is attached to the services.
 
-      ```env
-      ORDER_DB_HOST=localhost
-      ORDER_DB_USER=root
-      ORDER_DB_PASSWORD=yourpassword
-      ORDER_DB_NAME=order_db
  
-      INVENTORY_DB_HOST=localhost
-      INVENTORY_DB_USER=root
-      INVENTORY_DB_PASSWORD=yourpassword
-      INVENTORY_DB_NAME=inventory_db
- 
-      USER_DB_HOST=localhost
-      USER_DB_USER=root
-      USER_DB_PASSWORD=yourpassword
-      USER_DB_NAME=user_db
-      ```
-
-## Install Kafka & Redis (locally)(Optional)
+## Install Kafka & Redis (locally)
 
 **Kafka**:
 

@@ -6,11 +6,9 @@ from pydantic.v1 import BaseSettings
 
 load_dotenv(verbose=True, override=True)
 
-BRANCH = os.environ.get('branch')
-if BRANCH == "develop":
-    base_dir = pathlib.Path(__file__).parent
-    load_dotenv(base_dir, override=True)
-    response_secrets = {k: v for k, v in os.environ.items()}
+base_dir = pathlib.Path(__file__).parent
+load_dotenv(base_dir, override=True)
+response_secrets = {k: v for k, v in os.environ.items()}
 
 
 class GlobalConfig(BaseSettings):
@@ -34,7 +32,6 @@ class GlobalConfig(BaseSettings):
     REDIS_PORT: str = response_secrets["REDIS_PORT"]
 
     INVENTORY_SERVICE_URL: str = response_secrets["INVENTORY_SERVICE_URL"]
-
 
 
 config = GlobalConfig()
