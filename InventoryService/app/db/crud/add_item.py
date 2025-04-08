@@ -5,7 +5,7 @@ from InventoryService.configuration import config
 db = AsyncPostgresSQLDB()
 
 
-async def action(create_item: Item):
+async def action(create_item: Item) -> Item:
     result = await db.execute(
         f"INSERT INTO {config.INVENTORY_TABLE_NAME} "
         f"(store_id, item_id, item_name, item_description, price, quantity, alert_threshold, updated_at) "

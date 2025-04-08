@@ -1,10 +1,5 @@
-import logging
-import traceback
-
 from fastapi import HTTPException
 from starlette.middleware.base import BaseHTTPMiddleware
-
-logger = logging.getLogger(__name__)
 
 
 class ExceptionMiddleware(BaseHTTPMiddleware):
@@ -12,10 +7,10 @@ class ExceptionMiddleware(BaseHTTPMiddleware):
         try:
             response = await call_next(request)
             return response
+        except HTTPException as e:
+            raise e
         except Exception as exc:
-            logger.error("Unhandled error in middleware:")
-            logger.error(traceback.format_exc())
             return HTTPException(
                 status_code=500,
-                detail={"error": "Something went wrong on our end"},
+                detail={"error": "internal service error"},
             )
