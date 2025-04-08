@@ -15,14 +15,6 @@ CREATE TABLE IF NOT EXISTS inventory(
     updated_at TIMESTAMP NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS payment(
-    payment_id UUID PRIMARY KEY,
-    status TEXT NOT NULL,
-    mode TEXT  NOT NULL,
-    amount NUMERIC NOT NULL,
-    created_at TIMESTAMP NOT NULL
-);
-
 CREATE TABLE IF NOT EXISTS orders (
     order_id UUID PRIMARY KEY,
     status TEXT NOT NULL,
@@ -33,7 +25,6 @@ CREATE TABLE IF NOT EXISTS orders (
     created_at TIMESTAMP NOT NULL,
     updated_at TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (payment_id) REFERENCES payment(payment_id)
 );
 
 CREATE TABLE IF NOT EXISTS order_items (

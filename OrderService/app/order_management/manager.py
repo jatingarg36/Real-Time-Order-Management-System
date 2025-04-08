@@ -52,8 +52,8 @@ class OrderManager:
 
         return HTTPException(status_code=400, detail="The items in the orders are invalid")
 
-    async def cancel_order(self, order_id):
-        order = await fetch_order.action(order_id, self.response_encoder.encode_order_records)
+    async def cancel_order(self, order_id, user_id):
+        order = await fetch_order.action(str(order_id), str(user_id), self.response_encoder.encode_order_records)
 
         producer = await get_kafka_producer()
         producer.send_and_wait(topic=config.ORDER_CANCEL_KAFKA_TOPIC,

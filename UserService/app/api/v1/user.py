@@ -1,5 +1,6 @@
 import uuid
 from datetime import datetime
+from typing import List
 
 from fastapi import APIRouter
 from fastapi.params import Depends
@@ -12,16 +13,16 @@ from UserService.app.schemas.user_create import NewUser
 router = APIRouter(prefix='/user')
 
 
-@router.get('/all', description='Fetch all the users')
+@router.get('/all', response_model=List[User],
+            description="Retrieve a paginated list of all registered users.")
 async def action(params: Params = Depends()):
     return await get_all_users.action(params)
 
 
-@router.post('', description="Api endpoint to create a new user")
+@router.post('', response_model=User,
+             description="Create a new user with a unique username and registration timestamp.")
 async def action(new_user: NewUser):
     user = User(user_id=uuid.uuid4(), username=new_user.username, created_at=datetime.now())
-    print(user)
-    iscreated = await create_user.action(user)
-    if iscreated:
+    if await create_user.action(user):
         return user
     raise Exception("Unable to create new user")

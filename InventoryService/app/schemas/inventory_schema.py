@@ -1,8 +1,7 @@
 import uuid
 from typing import Optional
 from uuid import UUID
-
-from pydantic import BaseModel
+from pydantic import BaseModel, constr, Field
 
 
 class ItemUpdate(BaseModel):
@@ -15,9 +14,8 @@ class ItemUpdate(BaseModel):
 
 class ItemCreate(BaseModel):
     store_id: UUID = uuid.uuid4()
-    item_name: str
+    item_name: constr(max_length=20)
     item_description: str
-    price: float
-    quantity: int
-    alert_threshold: int
-
+    price: float = Field(..., gt=0)
+    quantity: int = Field(..., ge=0)
+    alert_threshold: int = Field(..., ge=0)

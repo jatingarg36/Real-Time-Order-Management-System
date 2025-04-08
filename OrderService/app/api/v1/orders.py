@@ -13,27 +13,28 @@ router = APIRouter(prefix='/orders')
 
 
 @router.get('/{order_id}', response_model=OrderResponse,
-            description='Fetch a specific order')
+            description="Retrieve details of a specific order using order ID and user ID.")
 async def action(order_id: UUID, user_id: UUID, inventory_cache=Depends(get_redis_client)):
     manager = OrderManager(inventory_cache)
     return await manager.fetch_order(user_id=user_id, order_id=order_id)
 
 
 @router.get('', response_model=List[OrderResponse],
-            description='Fetch list of orders for a user')
+            description="Get a paginated list of all orders associated with a specific user.")
 async def action(user_id: UUID, inventory_cache=Depends(get_redis_client),
                  params: Params = Depends()):
     manager = OrderManager(inventory_cache)
     return await manager.fetch_all_orders(user_id=user_id, params=params)
 
 
-@router.post('/place_order', description="Api endpoint to create an order")
+@router.post('/place_order', response_model=OrderResponse,
+             description="Create a new order with the provided order details.")
 async def action(order: OrderCreate, inventory_cache=Depends(get_redis_client)):
     manager = OrderManager(inventory_cache)
     return await manager.place_order(order)
 
 
-@router.patch('/cancel_order', description="Api endpoint to cancel the order")
-async def action(order_id: UUID, inventory_cache=Depends(get_redis_client)):
+@router.patch('/cancel_order', description="Cancel an existing order by providing the order ID and user ID.")
+async def action(order_id: UUID, user_id: UUID, inventory_cache=Depends(get_redis_client)):
     manager = OrderManager(inventory_cache)
-    await manager.cancel_order(order_id=order_id)
+    await manager.cancel_order(order_id=order_id, user_id=user_id)

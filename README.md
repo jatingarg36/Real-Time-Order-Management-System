@@ -7,7 +7,10 @@ composed of three primary services:
 - **InventoryService**: Manages inventory and stock levels.
 - **UserService**: Manages user information and authentication.
 
+**[Architectural Overview](./Architecture.md)**
+
 ---
+
 ## Prerequisites
 
 Before setting up the project, ensure you have the following installed:
@@ -19,6 +22,7 @@ Before setting up the project, ensure you have the following installed:
 - **Redis Server**: Acts as a caching layer or message broker for fast data retrieval and pub/sub use cases.
 
 ---
+
 ## Repository Structure
 
 The repository is organized as follows:
@@ -31,6 +35,7 @@ The repository is organized as follows:
 - `setup.py`: Script for setting up the Python packages.
 
 ---
+
 ## Database Configuration
 
 1. **Set Up MySQL Databases**:
@@ -46,6 +51,7 @@ The repository is organized as follows:
       configurations with your MySQL credentials and the respective database names.
 
 ---
+
 ## Installation and Setup
 
 1. **Clone the Repository**:
@@ -105,13 +111,15 @@ The repository is organized as follows:
    # Start Kafka
    bin/kafka-server-start.sh config/server.properties
    ```
-3. Enable auto topic creation in Kafka. This can be done by setting the following configuration in your Kafka `server.properties` file:
+3. Enable auto topic creation in Kafka. This can be done by setting the following configuration in your Kafka
+   `server.properties` file:
 
   ```properties
   auto.create.topics.enable=true
   ```
 
-  This allows Kafka to automatically create new topics when producers or consumers reference them, which is critical for seamless operation of the services.
+This allows Kafka to automatically create new topics when producers or consumers reference them, which is critical for
+seamless operation of the services.
 
 **Redis**:
 
@@ -152,41 +160,19 @@ Each service operates independently. Navigate to each service's directory and st
 
 Each service will start on its configured port. Ensure that the ports do not conflict and are accessible.
 
+## API Contract
+
+Refer to each service's swagger docs for detailed information on request and response formats.
+
+[API Contracts](./API_Contract.md)
+
 ---
-## API Endpoints
-
-Each service exposes specific API endpoints:
-
-- **OrderService**:
-    - `POST api/v1/orders/place_order`: Place a new order.
-    - `GET /orders?user_id=<user_id>`: Retrieve list of all the orders for a user_id.
-    - `GET /orders?user_id=<user_id>&order_id=<order_id>`: Retrieve information about an order.
-    - `PATCH /orders/cancel_order?order_id=<order_id>`: Cancel the order.
-
-  **_API Docs_**: `/order/api/docs`
-
-
-- **InventoryService**:
-    - `GET /inventory/all_items`: Check all inventory items present.
-    - `POST /inventory/add_item`: Add new item to the inventory.
-    - `PATCH /inventory/update_item`: Update item with (more quantity, new_price, new_alert_threshold).
-    - `PATCH /orders/update_status`: Update order status to mark it as prepared, delivered, etc.
-  
-    **_API Docs_**: `/inventory/api/docs`
-
-
-- **UserService**:
-    - `POST /users`: Create a new user.
-    - `GET /users`: Retrieve all user information.
-
-    **_API Docs_**: `/user/api/docs`
-
-
-Refer to each service's documentation for detailed information on request and response formats.
 
 ## Testing the Services
 
-After starting the services, you can test them using Postman tools on this collection: [Postman Collection](https://gold-capsule-22351.postman.co/workspace/Moments~4135ee7f-dcf9-44bd-a778-b985a4095f98/collection/11458443-b4318938-829f-4ed4-9f83-48442c216110?action=share&creator=11458443&active-environment=11458443-67ecc061-5a25-4762-b960-978cb0403629) or `curl`. Ensure
+After starting the services, you can test them using Postman tools on this
+collection: [Postman Collection](https://gold-capsule-22351.postman.co/workspace/Moments~4135ee7f-dcf9-44bd-a778-b985a4095f98/collection/11458443-b4318938-829f-4ed4-9f83-48442c216110?action=share&creator=11458443&active-environment=11458443-67ecc061-5a25-4762-b960-978cb0403629)
+or `curl`. Ensure
 that each service is running on its respective port and that the endpoints are accessible.
 
 ---
