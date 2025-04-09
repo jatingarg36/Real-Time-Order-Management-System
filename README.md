@@ -38,7 +38,7 @@ The repository is organized as follows:
 
 ## Database Configuration
 
-1. **Set Up MySQL Databases**:
+1. **Set Up PostgreSQL Databases**:
 
     - Create three separate databases for each service: `order_db`, `inventory_db`, and `user_db`.
 
